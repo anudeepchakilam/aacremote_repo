@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>see Comments here</h1>
+    {%with comments.count as comments_count%}
+      <h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2>
+    {%endwith%}
+    {%if comments%}
+    {%for comment in comments%}
+        <p id='ch'>comments{{forloop.counter}} by {{comment.name}}</p>
+          <div>{{comment.body|linebreaks}}</div>
+        {%endfor%}
+        {%else%}
+          <p>there are no comments yet</p>
+          {%endif%}
+        {%if csubmit%}
+        <h2>your comment added successfully </h2>
+        {%else%}
+        <form method="post">
+          {{form.as_p}}
+          {%csrf_token%}
+          <input type="submit" name="" value="Submit Comment">
+          </form>
+          {%endif%}
+  </body>
+</html>
